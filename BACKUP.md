@@ -58,6 +58,17 @@ export const actions = {
 
 2. 由于项目使用到scss预编译,所以需要安装node-sass和sass-loader,注意最好使用cnpm命令安装,否则无限报错
 
+### 上传项目到github
+
+1. 配置ssh
+2. git init
+3. git remote add origin https://github.com/leslie-choi/mt-app.git
+4. git pull origin master --allow-unrelated-histories
+5. git add .
+6. git  commit -m ''
+7. git push origin master
+
+
 ## 插件坑
 
 ## 数据库坑(win)
