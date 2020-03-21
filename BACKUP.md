@@ -69,6 +69,10 @@ export const actions = {
 7. git push origin master
 
 
+### 项目超时报500错误
+
+重新启动数据库和redis服务
+
 ## 插件坑
 
 ## 数据库坑(win)
@@ -83,7 +87,7 @@ export const actions = {
 
 ctx.query
 解构赋值
-前端处理后端穿过来的数据,使用map去映射,在artistic.vue中
+前端处理后端传过来的数据,如果很多数据不需要使用到,可以使用map去映射所需要的字段,然后显示在页面中,在artistic.vue中
 
 
 处理首页hover菜单出错
