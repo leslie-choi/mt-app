@@ -5,8 +5,11 @@ import City from '../dbs/models/city'
 
 let router = new Router({ prefix: '/geo' })
 
-router.get('/getPosition', async (ctx) => {
-  let { status, data: { province, city } } = await axios.get('http://cp-tools.cn/geo/getPosition')
+router.get('/getPosition', async ctx => {
+  let {
+    status,
+    data: { province, city }
+  } = await axios.get('http://cp-tools.cn/geo/getPosition')
   if (status === 200) {
     ctx.body = {
       province,
@@ -20,16 +23,15 @@ router.get('/getPosition', async (ctx) => {
   }
 })
 
-router.get('/menu', async (ctx) => {
+router.get('/menu', async ctx => {
   // 操作数据库
   // const result = await Menu.findOne()
   // ctx.body = {
   //   menu: result.menu
   // }
   let {
-    status, data: {
-      menu
-    }
+    status,
+    data: { menu }
   } = await axios.get('http://cp-tools.cn/geo/menu')
 
   if (status === 200) {
@@ -43,48 +45,50 @@ router.get('/menu', async (ctx) => {
   }
 })
 
-router.get('/province', async (ctx) => {
-  let province = await Province.find()
-  ctx.body = {
-    province: province.map(item => {
-      return {
-        id: item.id,
-        name: item.value[0]
-      }
-    })
-  }
-  // let { status, data: {
-  //   province
-  // } } = await axios.get('http://cp-tools.cn/geo/province')
+router.get('/province', async ctx => {
+  // let province = await Province.find()
   // ctx.body = {
-  //   province: status === 200 ? province : {}
+  //   province: province.map(item => {
+  //     return {
+  //       id: item.id,
+  //       name: item.value[0]
+  //     }
+  //   })
   // }
-})
-
-router.get('/province/:id', async (ctx) => {
-  let city = await City.findOne({ id: ctx.params.id })
-
+  let {
+    status,
+    data: { province }
+  } = await axios.get('http://cp-tools.cn/geo/province')
   ctx.body = {
-    code: 0,
-    city: city.value.map(item => {
-      return { province: item.province, id: item.id, name: item.name }
-    })
+    province: status === 200 ? province : {}
   }
-  // let { status, data: {
-  //   city
-  // } } = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}`)
-  // if (status === 200) {
-  //   ctx.body = {
-  //     city
-  //   }
-  // } else {
-  //   ctx.body = {
-  //     city: []
-  //   }
-  // }
 })
 
-router.get('/hotCity', async (ctx) => {
+router.get('/province/:id', async ctx => {
+  // let city = await City.findOne({ id: ctx.params.id })
+
+  // ctx.body = {
+  //   code: 0,
+  //   city: city.value.map(item => {
+  //     return { province: item.province, id: item.id, name: item.name }
+  //   })
+  // }
+  let {
+    status,
+    data: { city }
+  } = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}`)
+  if (status === 200) {
+    ctx.body = {
+      city
+    }
+  } else {
+    ctx.body = {
+      city: []
+    }
+  }
+})
+
+router.get('/hotCity', async ctx => {
   // let list = [
   //   '北京市',
   //   '上海市',
@@ -105,9 +109,10 @@ router.get('/hotCity', async (ctx) => {
   // ctx.body = {
   //   hots: nList
   // }
-  let { status, data: {
-    hots
-  } } = await axios.get(`http://cp-tools.cn/geo/hotCity`);
+  let {
+    status,
+    data: { hots }
+  } = await axios.get(`http://cp-tools.cn/geo/hotCity`)
   if (status === 200) {
     ctx.body = {
       hots
@@ -119,37 +124,38 @@ router.get('/hotCity', async (ctx) => {
   }
 })
 
-router.get('/city', async (ctx) => {
-  let city = []
-  let result = await City.find()
-  result.forEach(item => {
-    city = city.concat(item.value)
-  })
-  ctx.body = {
-    code: 200,
-    city: city.map(item => {
-      return {
-        province: item.province,
-        id: item.id,
-        name: item.name === '市辖区' || item.name === '省直辖县级行政区划'
-          ? item.province
-          : item.name
-      }
-    })
-  }
-
-  // let { status, data: {
-  //   city
-  // } } = await axios.get(`http://cp-tools.cn/geo/city`);
-  // if (status === 200) {
-  //   ctx.body = {
-  //     city
-  //   }
-  // } else {
-  //   ctx.body = {
-  //     city: []
-  //   }
+router.get('/city', async ctx => {
+  // let city = []
+  // let result = await City.find()
+  // result.forEach(item => {
+  //   city = city.concat(item.value)
+  // })
+  // ctx.body = {
+  //   code: 200,
+  //   city: city.map(item => {
+  //     return {
+  //       province: item.province,
+  //       id: item.id,
+  //       name:
+  //         item.name === '市辖区' || item.name === '省直辖县级行政区划'
+  //           ? item.province
+  //           : item.name
+  //     }
+  //   })
   // }
+
+  let { status, data: {
+    city
+  } } = await axios.get(`http://cp-tools.cn/geo/city`);
+  if (status === 200) {
+    ctx.body = {
+      city
+    }
+  } else {
+    ctx.body = {
+      city: []
+    }
+  }
 })
 
 export default router
