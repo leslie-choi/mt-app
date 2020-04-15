@@ -11,8 +11,8 @@ let router = new Router({ prefix: '/users' })
 
 let Store = new Redis().client
 
-router.post('/signup', async (ctx) => {
-  const { username, password, email, code } = ctx.request.body;
+router.post('/signup', async ctx => {
+  const { username, password, email, code } = ctx.request.body
 
   if (code) {
     const saveCode = await Store.hget(`nodemail:${username}`, 'code')
@@ -119,14 +119,22 @@ router.post('/verify', async (ctx, next) => {
   let mailOptions = {
     from: `"认证邮件" <${Email.smtp.user}>`,
     to: ko.email,
-    subject: '《慕课网高仿美团网全栈实战》注册码',
-    html: `您在《慕课网高仿美团网全栈实战》课程中注册，您的邀请码是:${ko.code}`
+    subject: '团购网注册码',
+    html: `您在团购网注册，邀请码是:${ko.code}`
   }
   await transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log('error:', error)
     } else {
-      Store.hmset(`nodemail:${ko.user}`, 'code', ko.code, 'expire', ko.expire, 'email', ko.email)
+      Store.hmset(
+        `nodemail:${ko.user}`,
+        'code',
+        ko.code,
+        'expire',
+        ko.expire,
+        'email',
+        ko.email
+      )
     }
   })
   ctx.body = {
@@ -148,7 +156,7 @@ router.get('/exit', async (ctx, next) => {
   }
 })
 
-router.get('/getUser', async (ctx) => {
+router.get('/getUser', async ctx => {
   if (ctx.isAuthenticated()) {
     const { username, email } = ctx.session.passport.user
     ctx.body = {

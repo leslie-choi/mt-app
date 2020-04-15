@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-  <style lang = "scss">
+<style lang = "scss">
 .m-product-categroy {
   padding: 15px 20px 0;
   background: #fff;
