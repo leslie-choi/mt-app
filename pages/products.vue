@@ -1,7 +1,7 @@
 <template>
   <el-row class="page-product">
     <el-col :span="19">
-      <crumbs :keyword="keyword" />
+      <!-- <crumbs :keyword="keyword" /> -->
       <categroy :types="types"
                 :areas="areas" />
       <list :list="list" />
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import axios from '@/server/interface/utils/axios'
 import Crumbs from '@/components/products/crumbs.vue'
 import Categroy from '@/components/products/category.vue'
 import List from '@/components/products/list.vue'
@@ -27,6 +28,7 @@ export default {
     List,
     Amap
   },
+  layout: 'default',
   data () {
     return {
       list: [],
@@ -39,18 +41,20 @@ export default {
   async asyncData (ctx) {
     let keyword = ctx.query.keyword
     let city = ctx.store.state.geo.position.city
-    let { status, data: { count, pois } } = await ctx.$axios.get('/search/resultsByKeywords', {
+    // let keyword = '火锅'
+    // let city = '广州'
+    let { status, data: { count, pois } } = await axios.get('/search/resultsByKeywords', {
       params: {
         keyword,
         city
       }
     })
-    let { status: status2, data: { areas, types } } = await ctx.$axios.get('/categroy/crumbs', {
-      params: {
-        city
-      }
-    })
-    if (status === 200 && count > 0 && status2 === 200) {
+    // let { status: status2, data: { areas, types } } = await axios.get('/categroy/crumbs', {
+    //   params: {
+    //     city
+    //   }
+    // })
+    if (status === 200 && count > 0) {
       return {
         list: pois.filter(item => item.photos.length).map(item => {
           return {
@@ -68,11 +72,23 @@ export default {
           }
         }),
         keyword,
-        areas: areas.filter(item => item.type !== '').slice(0, 5),
-        types: types.filter(item => item.type !== '').slice(0, 5),
+        // areas: areas.filter(item => item.type !== '').slice(0, 5),
+        // types: types.filter(item => item.type !== '').slice(0, 5),
         point: (pois.find(item => item.location).location || '').split(',')
       }
     }
+    // if (status == 200) console.log('233')
+    // return {
+    //   list: [],
+    //   keyword
+    // }
+  },
+  methods: {
+
+  },
+  created () {
+  },
+  mounted () {
   }
 }
 </script>

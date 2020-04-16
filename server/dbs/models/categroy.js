@@ -14,4 +14,4 @@ const Categroy = new Schema({
   }
 })
 
-export default mongoose.model('City', City)
+export default mongoose.model('Categroy', Categroy)

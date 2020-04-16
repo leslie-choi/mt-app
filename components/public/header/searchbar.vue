@@ -1,4 +1,4 @@
- <template>
+<template>
   <div class="search-panel">
     <el-row class="m-header-searchbar">
       <el-col :span="3"
@@ -6,62 +6,57 @@
         <img src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png"
              alt="美团">
       </el-col>
-      <el-col class="center"
-              :span="15">
+      <el-col :span="15"
+              class="center">
         <div class="wrapper">
-          <el-input placeholder="搜索商家或者地点"
-                    v-model="search"
+          <el-input v-model="search"
+                    placeholder="搜索商家或地点"
                     @focus="focus"
-                    @input="input"
-                    @blur="blur" />
-          <button class="el-button el-button--primary">
-            <i class="el-icon-search"></i>
-          </button>
-          <dl class="hotPlace"
-              style="overflow:hidden;"
-              v-if="isHotPlace">
+                    @blur="blur"
+                    @input="input" />
+          <button class="el-button el-button--primary"><i class="el-icon-search" /></button>
+          <dl v-if="isHotPlace"
+              style="overflow:hidden"
+              class="hotPlace">
             <dt>热门搜索</dt>
             <dd v-for="(item,idx) in $store.state.home.hotPlace.slice(0,5)"
                 :key="idx">
               <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
-              <!-- <a :href="'/products'">{{ item.name }}</a> -->
             </dd>
           </dl>
-          <dl class="searchList"
-              v-if="isSearchList">
+          <dl v-if="isSearchList"
+              class="searchList">
             <dd v-for="(item,idx) in searchList"
                 :key="idx">
               <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
-              <!-- <a :href="'/products'">{{ item.name }}</a> -->
             </dd>
           </dl>
         </div>
         <p class="suggest">
           <a v-for="(item,idx) in $store.state.home.hotPlace.slice(0,5)"
              :key="idx"
-             :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}
-          </a>
+             :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
         </p>
         <ul class="nav">
           <li>
             <nuxt-link to="/"
-                       class=" bottomMenu takeout">美团外卖</nuxt-link>
+                       class="takeout">美团外卖</nuxt-link>
           </li>
           <li>
             <nuxt-link to="/"
-                       class="bottomMenu movie">猫眼电影</nuxt-link>
+                       class="movie">猫眼电影</nuxt-link>
           </li>
           <li>
             <nuxt-link to="/"
-                       class="bottomMenu hotel">美团酒店</nuxt-link>
+                       class="hotel">美团酒店</nuxt-link>
           </li>
           <li>
             <nuxt-link to="/"
-                       class="bottomMenu apartment">民宿/公寓</nuxt-link>
+                       class="apartment">民宿/公寓</nuxt-link>
           </li>
           <li>
             <nuxt-link to="/"
-                       class="bottomMenu business">商家入驻/公寓</nuxt-link>
+                       class="business">商家入驻</nuxt-link>
           </li>
         </ul>
       </el-col>
@@ -80,24 +75,20 @@
         </ul>
       </el-col>
     </el-row>
-
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
 export default {
-  components: {},
-  props: {},
   data () {
     return {
       search: '',
       isFocus: false,
       hotPlace: [],
       searchList: []
-    };
+    }
   },
-  watch: {},
   computed: {
     isHotPlace: function () {
       return this.isFocus && !this.search
@@ -117,10 +108,7 @@ export default {
       }, 200)
     },
     input: _.debounce(async function () {
-      let self = this
-      console.log(self.$store.state.geo.position.city)
-      // console.log(self.$store.state.geo.position.city)
-      // let city = '广州'
+      let self = this;
       let city = self.$store.state.geo.position.city.replace('市', '')
       self.searchList = []
       let { status, data: { top } } = await self.$axios.get('/search/top', {
@@ -131,13 +119,9 @@ export default {
       })
       self.searchList = top.slice(0, 10)
     }, 300)
-  },
-  created () { },
-  mounted () {
-
   }
-};
+}
 </script>
-<style lang="scss" scoped>
-@import "@/assets/css/public/header/search.scss";
+
+<style lang="css">
 </style>
