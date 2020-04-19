@@ -2,7 +2,7 @@
   <el-row class="page-product">
     <el-col :span="19">
       <!-- <crumbs :keyword="keyword" /> -->
-      <categroy :types="types"
+      <category :types="types"
                 :areas="areas" />
       <list :list="list" />
     </el-col>
@@ -18,13 +18,13 @@
 <script>
 import axios from '@/server/interface/utils/axios'
 import Crumbs from '@/components/products/crumbs.vue'
-import Categroy from '@/components/products/category.vue'
+import Category from '@/components/products/category.vue'
 import List from '@/components/products/list.vue'
 import Amap from '@/components/public/map.vue'
 export default {
   components: {
     Crumbs,
-    Categroy,
+    Category,
     List,
     Amap
   },
@@ -49,12 +49,35 @@ export default {
         city
       }
     })
-    // let { status: status2, data: { areas, types } } = await axios.get('/categroy/crumbs', {
-    //   params: {
-    //     city
+    let { status: status2, data: { areas, types } } = await axios.get('/category/crumbs', {
+      params: {
+        city
+      }
+    })
+    // if (status === 200 && count > 0) {
+    //   return {
+    //     list: pois.filter(item => item.photos.length).map(item => {
+    //       return {
+    //         type: item.type,
+    //         img: item.photos[0].url,
+    //         name: item.name,
+    //         comment: Math.floor(Math.random() * 10000),
+    //         rate: Number(item.biz_ext.rating),
+    //         price: Number(item.biz_ext.cost),
+    //         scene: item.tag,
+    //         tel: item.tel,
+    //         status: '可订明日',
+    //         location: item.location,
+    //         module: item.type.split(';')[0]
+    //       }
+    //     }),
+    //     keyword,
+    //     // areas: areas.filter(item => item.type !== '').slice(0, 5),
+    //     // types: types.filter(item => item.type !== '').slice(0, 5),
+    //     point: (pois.find(item => item.location).location || '').split(',')
     //   }
-    // })
-    if (status === 200 && count > 0) {
+    // }
+    if (status === 200 && count > 0 && status2 === 200) {
       return {
         list: pois.filter(item => item.photos.length).map(item => {
           return {
@@ -72,16 +95,11 @@ export default {
           }
         }),
         keyword,
-        // areas: areas.filter(item => item.type !== '').slice(0, 5),
-        // types: types.filter(item => item.type !== '').slice(0, 5),
+        areas: areas.filter(item => item.type !== '').slice(0, 5),
+        types: types.filter(item => item.type !== '').slice(0, 5),
         point: (pois.find(item => item.location).location || '').split(',')
       }
     }
-    // if (status == 200) console.log('233')
-    // return {
-    //   list: [],
-    //   keyword
-    // }
   },
   methods: {
 

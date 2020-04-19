@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <dl class="m-categroy">
+    <dl class="m-category">
       <dt>按拼音首字母选择：</dt>
       <dd v-for="item in list"
           :key="item.index">
@@ -9,7 +9,7 @@
     </dl>
     <dl v-for="item in block"
         :key="item.title"
-        class="m-categroy-section">
+        class="m-category-section">
       <dt :id="'city-'+item.title">{{item.title}}</dt>
       <dd>
         <span v-for="c in item.city"
@@ -72,5 +72,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "@/assets/css/changeCity/categroy.scss";
+@import "@/assets/css/changeCity/category.scss";
 </style>

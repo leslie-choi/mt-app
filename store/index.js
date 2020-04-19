@@ -29,9 +29,9 @@ export const actions = {
       data: { result }
     } = await app.$axios.get('/search/hotPlace', {
       params: {
-        // city: app.store.state.geo.position.city.replace('市', '')
+        city: app.store.state.geo.position.city.replace('市', '')
         // city: geo.position
-        city: '广州'
+        // city: '广州'
       }
     })
     commit('home/setHotPlace', status3 === 200 ? result : [])

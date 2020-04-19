@@ -6,7 +6,7 @@
     </template>
     <template v-else>
       <nuxt-link to="/login"
-                 class="login">立即登录</nuxt-link>
+                 class="login">立即登录233</nuxt-link>
       <nuxt-link class="register"
                  to="/register">注册</nuxt-link>
     </template>
@@ -21,10 +21,10 @@ export default {
     }
   },
   async mounted () {
-    // const { status, data: { user } } = await this.$axios.get('/users/getUser')
-    // if (status === 200) {
-    //   this.user = user
-    // }
+    const { status, data: { user } } = await this.$axios.get('/users/getUser')
+    if (status === 200) {
+      this.user = user
+    }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="m-product-list">
+  <div class="m-products-list">
     <dl>
       <dd v-for="item in nav"
           :key="item.name"
@@ -60,5 +60,5 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 </style>

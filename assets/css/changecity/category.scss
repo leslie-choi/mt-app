@@ -1,4 +1,4 @@
-.m-categroy {
+.m-category {
   display: flex;
   margin-bottom: 30px;
 
@@ -21,18 +21,18 @@
     border-radius: 50%;
 
     &:hover {
-      background: #F8F8F8;
+      background: #f8f8f8;
     }
   }
 }
 
-.m-categroy-section {
+.m-category-section {
   display: flex;
   padding: 13px 30px 13px 10px;
   border-radius: 10px;
 
   &:hover {
-    background: #F8F8F8;
+    background: #f8f8f8;
   }
 
   dt {
@@ -45,8 +45,8 @@
     height: 40px;
     border-radius: 50%;
     color: #fff;
-    background: #13D1BE;
-    box-shadow: 0 4px 5px 0 rgba(39, 178, 164, .22);
+    background: #13d1be;
+    box-shadow: 0 4px 5px 0 rgba(39, 178, 164, 0.22);
   }
 
   dd {
