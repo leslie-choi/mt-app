@@ -30,7 +30,14 @@
 <script>
 export default {
   components: {},
-  props: {},
+  props: {
+    cur: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
+  },
   data () {
     return {
       cur: []
@@ -44,4 +51,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+img {
+  width: 90px;
+  height: 90px;
+}
+.m-order {
+  .empty {
+    text-align: center;
+    padding: 30px;
+  }
+}
 </style>
