@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="change-city">
     <dl class="m-category">
       <dt>按拼音首字母选择：</dt>
       <dd v-for="item in list"
@@ -11,9 +11,10 @@
         :key="item.title"
         class="m-category-section">
       <dt :id="'city-'+item.title">{{item.title}}</dt>
-      <dd>
+      <dd class="u-city">
         <span v-for="c in item.city"
-              :key="c">{{c}}</span>
+              :key="c"
+              @click="change(c)">{{c}}</span>
       </dd>
     </dl>
   </div>
@@ -42,7 +43,6 @@ export default {
         let c
         let d = {}
         // 将城市转换为拼音
-        console.log(city.city)
         city.city.forEach(item => {
           p = pyjs.getFullChars(item.name).toLocaleLowerCase().slice(0, 1)
           c = p.charCodeAt(0)
@@ -63,6 +63,11 @@ export default {
         }
       }
       // console.log(status, city)
+    },
+    async change (c) {
+      this.$store.dispatch('geo/setPosition', c)
+      console.log(this.$store.state.geo.position, c)
+      this.$router.push('/')
     }
   },
   created () { },
@@ -73,4 +78,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/assets/css/changeCity/category.scss";
+.u-city {
+  cursor: pointer;
+}
 </style>

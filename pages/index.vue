@@ -25,6 +25,8 @@ export default {
     Emenu,
     Life,
     Artistic
+  },
+  mounted () {
   }
 }
 </script>

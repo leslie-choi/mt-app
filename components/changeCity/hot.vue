@@ -3,7 +3,9 @@
     <dl>
       <dt>热门城市：</dt>
       <dd v-for="item in list"
-          :key="item.id">
+          @click="changeCity(item)"
+          :key="item.id"
+          class="hot-city">
         {{item.name === '市辖区' ? item.province : item.name}}
       </dd>
     </dl>
@@ -21,7 +23,13 @@ export default {
   },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+    async changeCity (item) {
+      console.log('233', this.$store.state.geo.position, item)
+      this.$store.dispatch('geo/setPosition', item.name == '市辖区' ? item.province : item.name)
+      this.$router.push('/')
+    }
+  },
   created () { },
   async mounted () {
     let { status, data: { hots } } = await this.$axios.get('/geo/hotcity')
@@ -33,4 +41,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/assets/css/changeCity/hot.scss";
+.hot-city {
+  cursor: pointer;
+}
 </style>
