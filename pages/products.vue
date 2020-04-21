@@ -1,7 +1,7 @@
 <template>
   <el-row class="page-product">
     <el-col :span="19">
-      <!-- <crumbs :keyword="keyword" /> -->
+      <crumbs :keyword="keyword" />
       <category :types="types"
                 :areas="areas" />
       <list :list="list" />
@@ -41,8 +41,6 @@ export default {
   async asyncData (ctx) {
     let keyword = ctx.query.keyword
     let city = ctx.store.state.geo.position.city
-    // let keyword = '火锅'
-    // let city = '广州'
     let { status, data: { count, pois } } = await axios.get('/search/resultsByKeywords', {
       params: {
         keyword,
@@ -54,29 +52,6 @@ export default {
         city
       }
     })
-    // if (status === 200 && count > 0) {
-    //   return {
-    //     list: pois.filter(item => item.photos.length).map(item => {
-    //       return {
-    //         type: item.type,
-    //         img: item.photos[0].url,
-    //         name: item.name,
-    //         comment: Math.floor(Math.random() * 10000),
-    //         rate: Number(item.biz_ext.rating),
-    //         price: Number(item.biz_ext.cost),
-    //         scene: item.tag,
-    //         tel: item.tel,
-    //         status: '可订明日',
-    //         location: item.location,
-    //         module: item.type.split(';')[0]
-    //       }
-    //     }),
-    //     keyword,
-    //     // areas: areas.filter(item => item.type !== '').slice(0, 5),
-    //     // types: types.filter(item => item.type !== '').slice(0, 5),
-    //     point: (pois.find(item => item.location).location || '').split(',')
-    //   }
-    // }
     if (status === 200 && count > 0 && status2 === 200) {
       return {
         list: pois.filter(item => item.photos.length).map(item => {
@@ -102,11 +77,11 @@ export default {
     }
   },
   methods: {
-
   },
   created () {
   },
   mounted () {
+    console.log(this.types, this.areas, this.point, this.keyword)
   }
 }
 </script>

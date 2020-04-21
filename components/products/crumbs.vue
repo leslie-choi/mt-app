@@ -17,9 +17,17 @@
 <script>
 export default {
   components: {},
-  props: {},
+  props: {
+    keyword: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    }
+  },
   data () {
     return {
+      keyword: ''
     }
   },
   watch: {},

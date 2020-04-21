@@ -3,8 +3,10 @@
     <el-row class="m-header-searchbar">
       <el-col :span="3"
               class="left">
-        <img src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png"
-             alt="美团">
+        <a href="/">
+          <img src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png"
+               alt="美团">
+        </a>
       </el-col>
       <el-col :span="15"
               class="center">
@@ -14,7 +16,13 @@
                     @focus="focus"
                     @blur="blur"
                     @input="input" />
-          <button class="el-button el-button--primary"><i class="el-icon-search" /></button>
+          <a :href="'/products?keyword='+encodeURIComponent(this.search)"
+             style="color:#FFF;">
+            <button class="el-button el-button--primary"
+                    @click="searchReault">
+              <i class="el-icon-search" />
+            </button>
+          </a>
           <dl v-if="isHotPlace"
               style="overflow:hidden"
               class="hotPlace">
@@ -118,7 +126,9 @@ export default {
         }
       })
       self.searchList = top.slice(0, 10)
-    }, 300)
+    }, 300),
+    searchReault: function () {
+    }
   }
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
   <el-row :gutter="0"
           class="m-header">
-    <el-col :span="5">
+    <el-col :span="6">
       <geo />
     </el-col>
-    <el-col :span="5">
+    <el-col :span="6">
       <user />
     </el-col>
-    <el-col :span="14">
+    <el-col :span="12">
       <navbar />
     </el-col>
   </el-row>

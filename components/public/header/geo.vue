@@ -20,6 +20,7 @@ export default {
   methods: {},
   created () { },
   mounted () {
+    console.log(this.$store.state.geo.position)
   }
 };
 </script>

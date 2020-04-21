@@ -25,8 +25,9 @@ export default {
   computed: {},
   methods: {
     async changeCity (item) {
-      console.log('233', this.$store.state.geo.position, item)
-      this.$store.dispatch('geo/setPosition', item.name == '市辖区' ? item.province : item.name)
+      console.log(item)
+      this.$store.dispatch('geo/setPosition', item.name == '市辖区' ? { positioin: '', city: item.province } : { positioin: '', city: item.name })
+      // this.$store.dispatch('geo/setPosition', { position: '', city: c })
       this.$router.push('/')
     }
   },

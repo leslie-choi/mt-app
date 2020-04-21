@@ -79,33 +79,46 @@ export default {
     },
     list: function () {
       let val = this.name
-      this.cur = this.list.filter(item => {
-        if (val === 'unpay') {
-          return item.status === 0
-        } else if (val === 'all') {
-          return true
-        } else {
-          return false
-        }
-      })
+      // this.cur = this.list.filter(item => {
+      //   if (val === 'unpay') {
+      //     return item.status === 0
+      //   } else if (val === 'all') {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // })
+      this.cur = this.list
     },
     cur: function () {
       let val = this.name
-      this.cur = this.list.filter(item => {
-        if (val === 'unpay') {
-          return item.status === 0
-        } else if (val === 'all') {
-          return true
-        } else {
-          return false
-        }
-      })
+      // this.cur = this.list.filter(item => {
+      //   if (val === 'unpay') {
+      //     return item.status === 0
+      //   } else if (val === 'all') {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // })
+      this.cur = this.list
     }
   },
   computed: {},
   methods: {
     handleClick: function (tab) {
       this.activeName = tab.name
+    },
+    filterList: function () {
+      this.list.filter(itme => {
+        if (val === 'unpay') {
+          return item.status === 0
+        } else if (val === 'all') {
+          return true
+        } else {
+          return false
+        }
+      })
     }
   },
   async asyncData (ctx) {

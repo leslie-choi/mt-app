@@ -21,20 +21,21 @@
     <ul class="ibody">
       <li v-for="item in cur"
           :key="item.title">
-        <el-card :body-style="{ padding: '0px' }"
-                 shadow="never">
-          <img :src="item.img"
-               class="image">
-          <ul class="cbody">
-            <li class="title">{{ item.title }}</li>
-            <li class="pos"><span>{{ item.pos }}</span></li>
-            <li class="price">￥<em>{{ item.price }}</em><span>/起</span></li>
-          </ul>
-        </el-card>
+        <a :href="'/products?keyword='+encodeURIComponent(item.title)">
+          <el-card :body-style="{ padding: '0px' }"
+                   shadow="never">
+            <img :src="item.img"
+                 class="image">
+            <ul class="cbody">
+              <li class="title">{{ item.title }}</li>
+              <li class="pos"><span>{{ item.pos }}</span></li>
+              <li class="price">￥<em>{{ item.price }}</em><span>/起</span></li>
+            </ul>
+          </el-card>
+        </a>
       </li>
     </ul>
   </section>
-  <!-- <div>233</div> -->
 </template>
 <script>
 import VueLazyload from 'vue-lazyload'

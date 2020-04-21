@@ -14,7 +14,7 @@
       <dd class="u-city">
         <span v-for="c in item.city"
               :key="c"
-              @click="change(c)">{{c}}</span>
+              @click="changeCity(c)">{{c}}</span>
       </dd>
     </dl>
   </div>
@@ -64,9 +64,10 @@ export default {
       }
       // console.log(status, city)
     },
-    async change (c) {
-      this.$store.dispatch('geo/setPosition', c)
-      console.log(this.$store.state.geo.position, c)
+    async changeCity (c) {
+      this.$store.dispatch('geo/setPosition', { position: '', city: c })
+      // console.log(this.$store.state.geo.city, c)
+      // console.log(this.$store.state.geo.position)
       this.$router.push('/')
     }
   },

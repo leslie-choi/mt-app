@@ -12,12 +12,12 @@
 export default {
   props: {
     keyword: {
-      type:String,
-      default:''
+      type: String,
+      default: ''
     },
     type: {
-      type:String,
-      default:''
+      type: String,
+      default: ''
     }
   }
 }

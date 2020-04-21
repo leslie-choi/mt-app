@@ -3,7 +3,7 @@
     <ul>
       <li v-if="cur.length">
         <el-row v-for="item in cur"
-                :key="item">
+                :key="item.index">
           <el-col :span="4">
             <img :src="item.img"
                  aitem.countlt="">
@@ -40,7 +40,6 @@ export default {
   },
   data () {
     return {
-      cur: []
     }
   },
   watch: {},
