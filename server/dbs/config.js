@@ -28,6 +28,7 @@ module.exports = {
     },
     get expire () {
       return () => {
+        // 有效时间60分钟
         return new Date().getTime() + 60 * 60 * 1000
       }
     }

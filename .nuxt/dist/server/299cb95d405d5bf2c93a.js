@@ -1,1 +1,0 @@
-exports.ids=[10],exports.modules={163:function(t,e,r){"use strict";r.r(e);var o={data:()=>({}),computed:{},created(){},mounted(){},methods:{}},c=r(1);var component=Object(c.a)(o,(function(){var t=this.$createElement;return(this._self._c||t)("div",[])}),[],!1,(function(t){}),"34eb6574","37f37a83");e.default=component.exports}};

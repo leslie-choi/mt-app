@@ -38,7 +38,7 @@
             </nuxt-link>
           </p>
           <p>
-            <nuxt-link to="">
+            <nuxt-link to="/account">
               <el-button round
                          size="medium">账户设置</el-button>
             </nuxt-link>

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _0bd08912 = () => interopDefault(import('../pages/account.vue' /* webpackChunkName: "pages/account" */))
 const _5b6d2e0b = () => interopDefault(import('../pages/cart.vue' /* webpackChunkName: "pages/cart" */))
 const _61c32c66 = () => interopDefault(import('../pages/changeCity.vue' /* webpackChunkName: "pages/changeCity" */))
 const _7e3bfc08 = () => interopDefault(import('../pages/detail.vue' /* webpackChunkName: "pages/detail" */))
@@ -31,6 +32,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/account",
+    component: _0bd08912,
+    name: "account"
+  }, {
     path: "/cart",
     component: _5b6d2e0b,
     name: "cart"

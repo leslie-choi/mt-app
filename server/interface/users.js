@@ -17,6 +17,15 @@ router.post('/signup', async ctx => {
   if (code) {
     const saveCode = await Store.hget(`nodemail:${username}`, 'code')
     const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
+    console.log(code, saveCode)
+    if (code !== saveCode) {
+      console.log('验证错误')
+      ctx.body = {
+        code: -1,
+        msg: '验证码错误'
+      }
+      return false
+    }
     if (code === saveCode) {
       if (new Date().getTime() - saveExpire > 0) {
         ctx.body = {
@@ -158,16 +167,29 @@ router.get('/exit', async (ctx, next) => {
 
 router.get('/getUser', async ctx => {
   if (ctx.isAuthenticated()) {
-    const { username, email } = ctx.session.passport.user
+    const { username, email, birthday, telephone } = ctx.session.passport.user
     ctx.body = {
-      user: username,
-      email
+      username: username,
+      email: email == '' ? '暂未设置' : email,
+      birthday: birthday == '' ? '暂未设置' : birthday,
+      telephone: telephone == '' ? '暂未设置' : telephone
     }
+    console.log(ctx.session.passport.user)
   } else {
     ctx.body = {
-      user: '',
-      email: ''
+      username: '',
+      email: '',
+      birthday: '',
+      telephone: ''
     }
+  }
+})
+
+router.post('/settingUser', async ctx => {
+  if (ctx.isAuthenticated()) {
+    // let nuser = User.update({username: })
+    // 新的用户参数
+    const { nusername, nemail, nbirthday, ntelephone } = ctx.request.body
   }
 })
 

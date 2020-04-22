@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const UserSchema = new Schema({
@@ -14,6 +13,12 @@ const UserSchema = new Schema({
   email: {
     type: String,
     require: true
+  },
+  birthday: {
+    type: String
+  },
+  telephone: {
+    type: Number
   }
 })
 
