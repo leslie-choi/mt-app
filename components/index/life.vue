@@ -8,9 +8,8 @@
         <div class="m-life-pic" />
       </el-col>
       <el-col :span="6">
-
         <div class="m-life-login"
-             v-if="!user">
+             v-if="!username">
           <h4><img src="//s0.meituan.net/bs/fe-web-meituan/2d05c2b/img/avatar.jpg"
                  alt=""></h4>
           <p class="m-life-login-name">Hi！你好</p>
@@ -28,7 +27,7 @@
           </p>
         </div>
         <div class="m-life-login"
-             v-if="user">
+             v-if="username">
           <h4><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587431588516&di=2f7d05ec4dcd7b6984c4180f24f4b955&imgtype=0&src=http%3A%2F%2Fimg.bq233.com%2Fkanqq%2Fpic%2Fupload%2F2018%2F0730%2F1532912905616893.jpg"
                  alt=""></h4>
           <p>
@@ -60,7 +59,7 @@
         <div class="m-life-downapp">
           <img src="//s1.meituan.net/bs/fe-web-meituan/60ac9a0/img/download-qr.png"
                alt="下载APP">
-          <p>美团APP手机版</p>
+          <p>团美APP手机版</p>
           <h4><span class="red">1元起</span><em class="gary">吃喝玩乐</em></h4>
         </div>
       </el-col>
@@ -76,13 +75,13 @@ export default {
   },
   data () {
     return {
-      user: ''
+      username: ''
     }
   },
   async mounted () {
-    const { status, data: { user } } = await this.$axios.get('/users/getUser')
+    const { status, data: { username } } = await this.$axios.get('/users/getUser')
     if (status == 200) {
-      this.user = user
+      this.username = username
     }
   }
 }

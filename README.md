@@ -1,10 +1,10 @@
 # mt-app
 
-基于nuxt框架模仿美团官网实战
+基于 nuxt 框架模仿团美官网实战
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 

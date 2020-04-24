@@ -3,7 +3,7 @@
     <!-- 面包屑导航 城市加关键词 -->
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{path: '/'}">
-        {{ $store.state.geo.position.city.replace('市','') }}美团
+        {{ $store.state.geo.position.city.replace('市','') }}团美
       </el-breadcrumb-item>
       <el-breadcrumb-item>
         <a href="/">

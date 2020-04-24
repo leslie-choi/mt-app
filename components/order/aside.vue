@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-col class="order-aside">
-      <h3 style="color:#13D1BE;margin-bottom:15px;">我的美团</h3>
+      <h3 style="color:#13D1BE;margin-bottom:15px;">我的团美</h3>
       <dl @click="showOrder">
         <dt>我的订单</dt>
         <dd>全部订单<i class="el-icon-arrow-right" /></dd>

@@ -1,7 +1,7 @@
 <template>
   <el-row class="page-product">
     <el-col :span="19">
-      <crumbs :keyword="keyword" />
+      <!-- <crumbs :keywords="keyword" /> -->
       <category :types="types"
                 :areas="areas" />
       <list :list="list" />
@@ -34,7 +34,7 @@ export default {
       list: [],
       types: [],
       areas: [],
-      keyword: '',
+      keywords: '',
       point: []
     }
   },
@@ -81,7 +81,7 @@ export default {
   created () {
   },
   mounted () {
-    console.log(this.types, this.areas, this.point, this.keyword)
+    console.log('分类：', this.types, '辖区分类：', this.areas, '经纬度：', this.point)
   }
 }
 </script>
