@@ -12,7 +12,6 @@ let Store = new Redis().client
 
 router.post('/signup', async ctx => {
   const { username, password, email, code } = ctx.request.body
-
   if (code) {
     const saveCode = await Store.hget(`nodemail:${username}`, 'code')
     const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
@@ -165,30 +164,77 @@ router.get('/exit', async (ctx, next) => {
 })
 
 router.get('/getUser', async ctx => {
+  // if (ctx.isAuthenticated()) {
+  //   const {
+  //     _id,
+  //     username,
+  //     email,
+  //     birthday,
+  //     telephone
+  //   } = ctx.session.passport.user
+  //   ctx.body = {
+  //     _id,
+  //     username,
+  //     email,
+  //     birthday,
+  //     telephone
+  //   }
+  //   console.log('useruseruser', ctx.session)
+  // } else {
+  //   ctx.body = {
+  //     username: '',
+  //     email: '',
+  //     birthday: '',
+  //     telephone: ''
+  //   }
+  // }
   if (ctx.isAuthenticated()) {
-    const { username, email, birthday, telephone } = ctx.session.passport.user
-    ctx.body = {
-      username: username,
-      email: email == '' ? '暂未设置' : email,
-      birthday: birthday == '' ? '暂未设置' : birthday,
-      telephone: telephone == '' ? '暂未设置' : telephone
-    }
-    console.log(ctx.session.passport.user)
-  } else {
-    ctx.body = {
-      username: '',
-      email: '',
-      birthday: '',
-      telephone: ''
-    }
+    console.log(ctx.session)
+    let _id = ctx.session.passport.user._id
+    // console.log('useruseruser', ctx.session.passport.user._id)
+    const res = await User.findById({ _id })
+    console.log('resresres', res)
+    ctx.body = res
   }
 })
 
-router.post('/settingUser', async ctx => {
+//修改用户信息
+router.post('/setting', async ctx => {
   if (ctx.isAuthenticated()) {
-    // let nuser = User.update({username: })
-    // 新的用户参数
-    const { nusername, nemail, nbirthday, ntelephone } = ctx.request.body
+    let _id = ctx.request.body._id
+    let obj = {
+      username: ctx.request.body.username,
+      email: ctx.request.body.email,
+      birthday: ctx.request.body.birthday,
+      telephone: ctx.request.body.telephone
+    }
+    // await User.findByIdAndUpdate(_id, obj, (err, res) => {
+    //   if (err) return false
+    //   ctx.body = {
+    //     code: 0,
+    //     msg: '修改成功！'
+    //   }
+    // })
+    await User.findByIdAndUpdate(
+      { _id },
+      { $set: obj },
+      { new: true },
+      (err, doc, res) => {
+        if (err) {
+          ctx.body = {
+            code: -1,
+            // msg: doc
+            msg: '修改失败！'
+          }
+          return false
+        }
+        ctx.body = {
+          code: 0,
+          // msg: doc
+          msg: '修改成功！'
+        }
+      }
+    )
   }
 })
 

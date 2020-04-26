@@ -15,10 +15,12 @@ const UserSchema = new Schema({
     require: true
   },
   birthday: {
-    type: String
+    type: String,
+    require: false
   },
   telephone: {
-    type: Number
+    type: Number,
+    require: false
   }
 })
 
