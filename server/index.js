@@ -31,6 +31,7 @@ app.use(json())
 mongoose.connect(dbConfig.dbs, {
   useNewUrlParser: true
 })
+mongoose.set('useFindAndModify', false)
 app.use(passport.initialize())
 app.use(passport.session())
 // Import and Set Nuxt.js options

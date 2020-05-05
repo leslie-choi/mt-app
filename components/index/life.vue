@@ -8,7 +8,8 @@
         <div class="m-life-pic" />
       </el-col>
       <el-col :span="6">
-        <div class="m-life-login">
+        <div class="m-life-login"
+             v-if="!user">
           <h4><img src="//s0.meituan.net/bs/fe-web-meituan/2d05c2b/img/avatar.jpg"
                  alt=""></h4>
           <p class="m-life-login-name">Hi！你好</p>
@@ -22,6 +23,23 @@
             <nuxt-link to="/login">
               <el-button round
                          size="medium">立即登录</el-button>
+            </nuxt-link>
+          </p>
+        </div>
+        <div class="m-life-login"
+             v-if="user">
+          <h4><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587431588516&di=2f7d05ec4dcd7b6984c4180f24f4b955&imgtype=0&src=http%3A%2F%2Fimg.bq233.com%2Fkanqq%2Fpic%2Fupload%2F2018%2F0730%2F1532912905616893.jpg"
+                 alt=""></h4>
+          <p>
+            <nuxt-link to="/order">
+              <el-button round
+                         size="medium">我的订单</el-button>
+            </nuxt-link>
+          </p>
+          <p>
+            <nuxt-link to="/account">
+              <el-button round
+                         size="medium">账户设置</el-button>
             </nuxt-link>
           </p>
         </div>
@@ -54,6 +72,18 @@ import Slider from './slider.vue'
 export default {
   components: {
     Slider
+  },
+  data () {
+    return {
+      user: ''
+    }
+  },
+  async mounted () {
+    const { status, data: { user } } = await this.$axios.get('/users/getUser')
+    if (status == 200) {
+      this.user = user
+      console.log(this.user)
+    }
   }
 }
 </script>
@@ -61,4 +91,10 @@ export default {
 
 <style lang="scss">
 @import "@/assets/css/index/life.scss";
+.m-life {
+  img {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
 </style>
