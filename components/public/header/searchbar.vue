@@ -3,8 +3,8 @@
     <el-row class="m-header-searchbar">
       <el-col :span="3"
               class="left">
-        <img src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png"
-             alt="美团">
+        <!-- <img src="@/assets/img/tm.jpg"
+             alt="团美"> -->
       </el-col>
       <el-col :span="15"
               class="center">
@@ -40,7 +40,7 @@
         <ul class="nav">
           <li>
             <nuxt-link to="/"
-                       class="takeout">美团外卖</nuxt-link>
+                       class="takeout">团美外卖</nuxt-link>
           </li>
           <li>
             <nuxt-link to="/"
@@ -48,7 +48,7 @@
           </li>
           <li>
             <nuxt-link to="/"
-                       class="hotel">美团酒店</nuxt-link>
+                       class="hotel">团美酒店</nuxt-link>
           </li>
           <li>
             <nuxt-link to="/"

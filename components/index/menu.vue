@@ -39,7 +39,7 @@ export default {
         name: '外卖',
         child: [{
           title: '外卖',
-          child: ['美团外卖']
+          child: ['团美外卖']
         }]
       }, {
         type: 'hotel',
